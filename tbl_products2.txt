@@ -1,0 +1,53 @@
+CREATE TABLE `tbl_products2` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `productname` varchar(45) DEFAULT NULL,
+  `productDesc` text DEFAULT NULL,
+  `status` varchar(45) DEFAULT NULL,
+  `handle` varchar(45) DEFAULT NULL,
+  `substrate` varchar(45) DEFAULT NULL,
+  
+  `handleTreeColor` varchar(100) DEFAULT NULL, #ADDED
+  `substrateMatLotNum` varchar(100) DEFAULT NULL, #ADDED
+  `handleTreeMatLotNum` varchar(100) DEFAULT NULL, #ADDED
+  `handleTreeMatType` varchar(100) DEFAULT NULL, #ADDED
+  `substrateMatType` varchar(100) DEFAULT NULL, #ADDED
+  `pulltestingMin` varchar(100) DEFAULT NULL, #ADDED
+  
+  `cuttingforceRange` varchar(100) DEFAULT NULL,
+  `sealingtimeRange` varchar(100) DEFAULT NULL,
+  `cuttingspeedRange` varchar(100) DEFAULT NULL,
+  `approachingpositionRange` varchar(100) DEFAULT NULL,
+  `sealingpositionspeedRange` varchar(45) DEFAULT NULL,
+  `sealingpositionRange` varchar(45) DEFAULT NULL,
+  `mode` varchar(45) DEFAULT NULL,
+  `moldopenspeedRange` varchar(45) DEFAULT NULL,
+  `watertempRange` varchar(45) DEFAULT NULL,
+  `airpressureRange` varchar(45) DEFAULT NULL,
+  `upperheattempRange` varchar(45) DEFAULT NULL,
+  `lowerheattempRange` varchar(45) DEFAULT NULL,
+  `uppermoldtempRange` varchar(45) DEFAULT NULL,
+  `lowermoldtempRange` varchar(45) DEFAULT NULL,
+  `totallengthRange` varchar(45) DEFAULT NULL,
+  `swabheadlengthRange` varchar(45) DEFAULT NULL,
+  `swabheadwidthRange` varchar(45) DEFAULT NULL,
+  `swabheadthicknessRange` varchar(45) DEFAULT NULL,
+  `swabhandlewidthRange` varchar(45) DEFAULT NULL,
+  `swabhandlethicknessRange` varchar(45) DEFAULT NULL,
+  `swabheaddiameterRange` varchar(45) DEFAULT NULL,
+
+  `swabdimensionspecsRange` varchar(45) DEFAULT NULL, #ADDED
+  `pull/sealstrengthspecsRange` varchar(45) DEFAULT NULL, #ADDED
+  
+  `noofsample` varchar(45) DEFAULT NULL,
+  `pullTest` varchar(45) DEFAULT NULL,
+  `swabheadpullingRange` varchar(45) DEFAULT NULL,
+  `swabheadpoppingRange` varchar(45) DEFAULT NULL,
+  `pulltestdesc` varchar(45) DEFAULT NULL,
+
+  `heaterTempUpnLowRange` varchar(45) DEFAULT NULL, #ADDED
+  `heatingTimeRange` varchar(45) DEFAULT NULL, #ADDED
+  `heaterSwabHandleFixtureRange` varchar(45) DEFAULT NULL, #ADDED
+  `fixtureClosingTimeRange` varchar(45) DEFAULT NULL, #ADDED
+  `department` varchar(100) DEFAULT NULL, #ADDED
+  UNIQUE KEY `id_UNIQUE` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

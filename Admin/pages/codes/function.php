@@ -711,4 +711,14 @@ WHERE `id` = '$prod_id'");
 		$result = mysqli_query($this->dbh, "SELECT * FROM headforming.tbl_swabassembly WHERE id = '$id'");
 		return $result;
 	}
+	public function	yearThermalList()
+	{
+		$result = mysqli_query($this->dbh, "SELECT id,product, workorder, date FROM headforming.tbl_thermalbonding");
+		return $result;
+	}
+	public function	yearSwabList()
+	{
+		$result = mysqli_query($this->dbh, "SELECT id,product, workorder, date FROM headforming.tbl_swabassembly");
+		return $result;
+	}
 }

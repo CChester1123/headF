@@ -211,6 +211,11 @@
         </div>
       </div>
     </div>
+    <?php if ($_SESSION['account_type'] == 'QA' || $_SESSION['account_type'] == 'Admin' || $_SESSION['account_type'] == 'QA Manager') { ?>
+      <ol class="float-sm-right">
+        <a type="button" class="btn btn-info fa fa-plus-square excelBtn"> Report</a>
+      </ol>
+    <?php   } ?>
   </section>
 
 </div>
@@ -488,6 +493,86 @@
   </div>
 </div>
 
+<div class="modal fade" id="excelList" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">System Message </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="card-body">
+          <div class="form-group">
+            <label>Generate Report</label>
+            <select id="departmentYear" class="form-control" onchange="updateYearList()">
+              <!-- <option value="Head Forming" selected>Head Forming</option> -->
+              <option value="Thermal Bonding" selected>Thermal Bonding</option>
+              <option value="Swab Assembly">Swab Assembly</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Select Year</label>
+            <select id="year-thermal" class="form-control year-select" style="display: none;">
+              <option value="" selected>Choose Item Code</option>
+              <?php
+              $years = [];
+              $sql = $user->yearThermalList();
+              while ($list = mysqli_fetch_array($sql)) {
+                $year = date('Y', strtotime($list['date']));
+                if (!in_array($year, $years)) {
+                  $years[] = $year;
+                }
+              }
+
+              sort($years);
+
+              foreach ($years as $year) { ?>
+                <option>
+                  <?php echo $year; ?>
+                </option>
+              <?php } ?>
+            </select>
+
+            <select id="year-swab" class="form-control year-select" style="display: none;">
+              <option value="" selected>Choose Item Code</option>
+              <?php
+              $years = [];
+              $sql = $user->yearSwabList();
+              while ($list = mysqli_fetch_array($sql)) {
+                $year = date('Y', strtotime($list['date']));
+                if (!in_array($year, $years)) {
+                  $years[] = $year;
+                }
+              }
+
+              sort($years);
+
+              foreach ($years as $year) { ?>
+                <option>
+                  <?php echo $year; ?>
+                </option>
+              <?php } ?>
+            </select>
+
+            <select id="year-default" class="form-control year-select" style="display: none;">
+              <option value="">No data for this department</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="createExcel">Yes</button>
+        <button type="button" class="btn btn-Danger" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </div>
 
 <?php include 'includes/footer.php'; ?>
@@ -564,7 +649,7 @@
   filterPartNo();
 
 
-  
+
   $(document).on('click', '.createProduct', function() {
     $("#createList").modal("show");
   });
@@ -825,5 +910,50 @@
   $(document).on('click', '.btnView3', function() {
     id = $(this).attr("id");
     location.href = "checklistSwabView?id=" + id;
+  });
+
+  $(document).on('click', '.excelBtn', function() {
+    $("#excelList").modal("show");
+  });
+
+  $(document).on('click', '#createExcel', function() {
+    var yearSelected = $.trim($("#year-thermal").val() || $("#year-swab").val());
+    var deptSelected = $.trim($("#departmentYear").val());
+
+    if (!yearSelected || yearSelected == "Choose Year") {
+      $.notify("Please select a Year", "error");
+      return;
+    }
+
+    var url = (deptSelected == 'Thermal Bonding' && $("#year-thermal").val()) ||
+      (deptSelected == 'Swab Assembly' && $("#year-swab").val()) ? 'data2.php' : null;
+
+    if (!url) {
+      $.notify("Invalid combination of year and department", "error");
+      return;
+    }
+
+    $.ajax({
+      url: url,
+      method: 'GET',
+      data: {
+        yearSelected: yearSelected
+      },
+      success: function(result) {
+        if ($.trim(result) != 0) {
+          $.notify("Excel file generated successfully", "success");
+          setTimeout(function() {
+            $("#year-thermal, #year-swab").val("");
+            window.location.href = `${url}?yearSelected=${yearSelected}&deptSelected=${deptSelected}`;
+            $("#excelList").modal("hide");
+          }, 2000);
+        } else {
+          $.notify("Error encountered while generating Excel. Please contact your administrator", "error");
+        }
+      },
+      error: function() {
+        $.notify("An error occurred. Please try again later", "error");
+      }
+    });
   });
 </script>
