@@ -17,6 +17,14 @@
             </ol>
           </div>
         <?php   } ?>
+
+        <?php if ($_SESSION['account_type'] == 'QA' || $_SESSION['account_type'] == 'Admin' || $_SESSION['account_type'] == 'QA Manager') { ?>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li><a type="button" class="btn btn-info fa fa-plus-square createProduct2" data-toggle="modal" data-target="#CreateModal"> Add Checklist </a></li>
+            </ol>
+          </div>
+        <?php   } ?>
       </div>
     </div><!-- /.container-fluid -->
   </section>
@@ -205,6 +213,59 @@
     </div>
   </section>
 
+</div>
+<div class="modal fade" id="createList2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">System Message </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="card-body">
+          <div class="form-group">
+            <label>Classification</label>
+            <select id="department" class="form-control" onchange="filterPartNo()">
+              <option value="Head Forming" selected>Head Forming</option>
+              <option value="Thermal Bonding">Thermal Bonding</option>
+              <option value="Swab Assembly">Swab Assembly</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>FG PART NO.</label>
+            <select id="partNo" class="form-control" onchange="updateDepartment()">
+              <option value="" active>Choose Item Code</option>
+              <?php
+              $sql = $user->selectPartNo();
+              while ($list = mysqli_fetch_array($sql)) { ?>
+                <option value="<?php echo base64_encode($list['id']); ?>" data-department="<?php echo $list['department']; ?>">
+                  <?php echo $list['productname']; ?>
+                </option>
+              <?php } ?>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label> Qualification</label>
+            <select id="type" class="form-control">
+              <option value="Start-up qualification" selected>Start-up qualification</option>
+              <option value="In-Process Audit">In-Process Audit</option>
+              <option value="Product Change">Product Change</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary createAccount" id="createProduct2">Create</button>
+        <button type="button" class="btn btn-Danger" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="modal fade" id="createList" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -427,66 +488,89 @@
   </div>
 </div>
 
-<div class="modal fade" id="createList" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">System Message </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-
-      <div class="modal-body">
-        <div class="card-body">
-          <div class="form-group">
-            <label>Classification</label>
-            <select id="department" class="form-control" onchange="filterPartNo()">
-              <option value="Head Forming" selected>Head Forming</option>
-              <option value="Thermal Bonding">Thermal Bonding</option>
-              <option value="Swab Assembly">Swab Assembly</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>FG PART NO.</label>
-            <select id="partNo" class="form-control" onchange="updateDepartment()">
-              <option value="" active>Choose Item Code</option>
-              <?php
-              $sql = $user->selectPartNo();
-              while ($list = mysqli_fetch_array($sql)) { ?>
-                <option value="<?php echo base64_encode($list['id']); ?>" data-department="<?php echo $list['department']; ?>">
-                  <?php echo $list['productname']; ?>
-                </option>
-              <?php } ?>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label> Qualification</label>
-            <select id="type" class="form-control">
-              <option value="Start-up qualification" selected>Start-up qualification</option>
-              <option value="In-Process Audit">In-Process Audit</option>
-              <option value="Product Change">Product Change</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary createAccount" id="createProduct">Create</button>
-        <button type="button" class="btn btn-Danger" data-dismiss="modal">Cancel</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 </div>
 
 <?php include 'includes/footer.php'; ?>
 <script>
+  function updateYearList() {
+    const selectedDept = document.getElementById('departmentYear').value;
+    const yearSelects = document.querySelectorAll('.year-select');
+
+    yearSelects.forEach(select => {
+      select.style.display = 'none';
+      select.selectedIndex = 0;
+    });
+
+    if (selectedDept === 'Thermal Bonding') {
+      document.getElementById('year-thermal').style.display = 'block';
+    } else if (selectedDept === 'Swab Assembly') {
+      document.getElementById('year-swab').style.display = 'block';
+    } else {
+      document.getElementById('year-default').style.display = 'block';
+    }
+  }
+  document.addEventListener('DOMContentLoaded', updateYearList);
+
+  // Function to filter FG PART NO. based on the selected department
+  function filterPartNo() {
+    const selectedDepartment = document.getElementById("department").value;
+    const partNoOptions = document.querySelectorAll("#partNo option");
+
+    partNoOptions.forEach(option => {
+      if (option.value === "") {
+        // Always show the default "Choose Item Code" option
+        option.style.display = "block";
+      } else {
+        // Show or hide based on the department
+        if (option.getAttribute("data-department") === selectedDepartment) {
+          option.style.display = "block";
+        } else {
+          option.style.display = "none";
+        }
+      }
+    });
+    // Reset the selected value of the FG PART NO. dropdown if it doesn't match the department
+    const selectedPartNo = document.getElementById("partNo");
+    if (selectedPartNo.value !== "" && selectedPartNo.querySelector(`option[value="${selectedPartNo.value}"]`).getAttribute("data-department") !== selectedDepartment) {
+      selectedPartNo.value = "";
+    }
+  }
+
+  // Function to update the department dropdown based on the selected FG PART NO.
+  function updateDepartment() {
+    const selectedPartNo = document.getElementById("partNo");
+    const selectedOption = selectedPartNo.options[selectedPartNo.selectedIndex];
+
+    if (selectedOption.value !== "") {
+      // Get the department from the selected FG PART NO.
+      const department = selectedOption.getAttribute("data-department");
+
+      // Set the department dropdown to the corresponding department
+      const departmentDropdown = document.getElementById("department");
+      departmentDropdown.value = department;
+
+      // Filter the FG PART NO. dropdown to show only options for the selected department
+      filterPartNo();
+
+      // Ensure the selected FG PART NO. remains selected
+      selectedPartNo.value = selectedOption.value;
+    } else {
+      // If "Choose Item Code" is selected, reset the department dropdown
+      document.getElementById("department").value = "Head Forming"; // Default department
+      filterPartNo();
+    }
+  }
+  // Initial call to filter FG PART NO. based on the default department
+  filterPartNo();
+
+
+  
   $(document).on('click', '.createProduct', function() {
     $("#createList").modal("show");
+  });
+
+  $(document).on('click', '.createProduct2', function() {
+    $("#createList2").modal("show");
   });
 
   $(document).on('click', '#createProduct', function() {
@@ -499,6 +583,30 @@
     } else {
       location.href = "checklistCreate?Productid=" + partNo + "&type=" + type;
     }
+  });
+
+  $(document).on('click', '#createProduct2', function() {
+    var partNo = $.trim($("#partNo").val()),
+      type = $.trim($("#type").val()),
+      department = $.trim($("#department").val());
+
+    if (!partNo) {
+      $.notify("Please select Part No", "error");
+      return;
+    }
+
+    $("#createList2").modal("show");
+
+    var url;
+    if (department === "Thermal Bonding" && type === "In-Process Audit") {
+      url = "checklistThermal";
+    } else if (department === "Swab Assembly" && type === "In-Process Audit") {
+      url = "checklistSwab";
+    } else {
+      url = "checklistCreate";
+    }
+
+    location.href = `${url}?Productid=${encodeURIComponent(partNo)}&type=${encodeURIComponent(type)}&department=${encodeURIComponent(department)}`;
   });
 
   $(document).on('click', '.btnView', function() {
