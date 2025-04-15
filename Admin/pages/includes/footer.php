@@ -5,8 +5,8 @@
       <b>Version</b> 3.2.0
     </div>
   </footer> -->
-  <aside class="control-sidebar control-sidebar-dark">
-  </aside>
+<aside class="control-sidebar control-sidebar-dark">
+</aside>
 </div>
 <script src="../plugins/jquery/jquery.min.js"></script>
 <script src="../plugins/jquery-ui/jquery-ui.min.js"></script>
@@ -45,21 +45,40 @@
 <script src="../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
 <script>
-  $(function () {
+  $(function() {
     $("#example1").DataTable({
-            "ordering": false,
-      "responsive": true, "lengthChange": false, "autoWidth": false,
+      "ordering": false,
+      "responsive": true,
+      "lengthChange": false,
+      "autoWidth": false,
 
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-      $("#example2").DataTable({
-            "ordering": false,
-      "responsive": true, "lengthChange": false, "autoWidth": false,
+    $("#example2").DataTable({
+      "ordering": false,
+      "responsive": true,
+      "lengthChange": false,
+      "autoWidth": false,
 
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-   
- 
+    $("#example3").DataTable({
+      "ordering": false,
+      "responsive": true,
+      "lengthChange": false,
+      "autoWidth": false,
+
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    $("#example4").DataTable({
+      "ordering": false,
+      "responsive": true,
+      "lengthChange": false,
+      "autoWidth": false,
+
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+
 
   });
 </script>
 </body>
+
 </html>
