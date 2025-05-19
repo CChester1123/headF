@@ -5,7 +5,7 @@ ini_set('display_errors', 0);
 header('Access-Control-Allow-Origin: *');
 session_start();
 
-define('DB_SERVER', '192.168.11.177');
+define('DB_SERVER', '192.168.11.183');
 define('DB_USER', 'root');
 define('DB_PASS', '');
 define('DB_NAME', 'headforming');
@@ -132,17 +132,17 @@ class admin_creation
 		return $result;
 	}
 
-	public function createProduct($product, $productDesc, $handle, $subtrate, $status, $arrcuttingforce, $arrsealingtime, $arrcuttingspeed, $arrapproachingposition, $arrsealingpositionspeed, $arrsealingposition, $arrCheckbox, $moldopenspeed, $arrwatertemp, $arrairpressure, $arrupperheatertemp, $arrlowerheatertemp, $arruppermoldtemp, $arrlowermoldtemp, $arrtotalLength, $arrswabheadlength, $arrswabheadwidth, $arrswabheadthickness, $arrswabhandlewidth, $arrswabhandlethickness, $arrswabhandlediameter, $noHandleperHT, $arrpulltest, $arrswabheadpulling, $arrswabheadpopping, $pulltestdesc, $substrateDimensionforce, $pullSeatTestforce, $handleColor, $substrateLotNum, $handleTreeMaterialNum, $machineTreeMatType, $substrateType)
+	public function createProduct($product, $productDesc, $handle, $subtrate, $status, $arrcuttingforce, $arrsealingtime, $arrcuttingspeed, $arrapproachingposition, $arrsealingpositionspeed, $arrsealingposition, $arrCheckbox, $moldopenspeed, $arrwatertemp, $arrairpressure, $arrupperheatertemp, $arrlowerheatertemp, $arruppermoldtemp, $arrlowermoldtemp, $arrtotalLength, $arrswabheadlength, $arrswabheadwidth, $arrswabheadthickness, $arrswabhandlewidth, $arrswabhandlethickness, $arrswabhandlediameter, $noHandleperHT, $arrpulltest, $arrswabheadpulling, $arrswabheadpopping, $pulltestdesc, $substrateDimensionforce, $pullSeatTestforce, $handleColor, $substrateLotNum, $handleTreeMaterialNum, $machineTreeMatType, $substrateType, $department)
 	{
 
-		$confirm = mysqli_query($this->dbh, "SELECT * FROM headforming.tbl_products2 WHERE productname = '$product'");
+		$confirm = mysqli_query($this->dbh, "SELECT * FROM headforming.tbl_products2 WHERE productname = '$product' AND department = '$department'");
 		$count_row = $confirm->num_rows;
 
 		if ($count_row >= 1) {
 			return "Product Code Already Exist";
 		} else {
 
-			$result = mysqli_query($this->dbh, "INSERT INTO tbl_products2 (productname,productDesc,handle, substrate, status, cuttingforceRange,sealingtimeRange,cuttingspeedRange,approachingpositionRange,sealingpositionspeedRange,sealingpositionRange,mode,moldopenspeedRange,watertempRange,airpressureRange,upperheattempRange,lowerheattempRange,uppermoldtempRange,lowermoldtempRange,totallengthRange,swabheadlengthRange,swabheadwidthRange,swabheadthicknessRange,swabhandlewidthRange,swabhandlethicknessRange,swabheaddiameterRange,noofsample,pullTest,swabheadpullingRange,swabheadpoppingRange,pulltestdesc,substrateDimention,pullSeatTest,handleColor,substrateLotNum,handleTreeMaterialNum,machineTreeMatType,substrateType) VALUES ('$product','$productDesc','$handle','$subtrate','$status','$arrcuttingforce','$arrsealingtime','$arrcuttingspeed','$arrapproachingposition','$arrsealingpositionspeed','$arrsealingposition','$arrCheckbox','$moldopenspeed','$arrwatertemp','$arrairpressure','$arrupperheatertemp','$arrlowerheatertemp','$arruppermoldtemp','$arrlowermoldtemp','$arrtotalLength','$arrswabheadlength','$arrswabheadwidth','$arrswabheadthickness','$arrswabhandlewidth','$arrswabhandlethickness','$arrswabhandlediameter','$noHandleperHT','$arrpulltest','$arrswabheadpulling','$arrswabheadpopping','$pulltestdesc','$substrateDimensionforce','$pullSeatTestforce','$handleColor','$substrateLotNum','$handleTreeMaterialNum','$machineTreeMatType','$substrateType')");
+			$result = mysqli_query($this->dbh, "INSERT INTO tbl_products2 (productname,productDesc,handle, substrate, status, cuttingforceRange,sealingtimeRange,cuttingspeedRange,approachingpositionRange,sealingpositionspeedRange,sealingpositionRange,mode,moldopenspeedRange,watertempRange,airpressureRange,upperheattempRange,lowerheattempRange,uppermoldtempRange,lowermoldtempRange,totallengthRange,swabheadlengthRange,swabheadwidthRange,swabheadthicknessRange,swabhandlewidthRange,swabhandlethicknessRange,swabheaddiameterRange,noofsample,pullTest,swabheadpullingRange,swabheadpoppingRange,pulltestdesc,substrateDimention,pullSeatTest,handleColor,substrateLotNum,handleTreeMaterialNum,machineTreeMatType,substrateType,department) VALUES ('$product','$productDesc','$handle','$subtrate','$status','$arrcuttingforce','$arrsealingtime','$arrcuttingspeed','$arrapproachingposition','$arrsealingpositionspeed','$arrsealingposition','$arrCheckbox','$moldopenspeed','$arrwatertemp','$arrairpressure','$arrupperheatertemp','$arrlowerheatertemp','$arruppermoldtemp','$arrlowermoldtemp','$arrtotalLength','$arrswabheadlength','$arrswabheadwidth','$arrswabheadthickness','$arrswabhandlewidth','$arrswabhandlethickness','$arrswabhandlediameter','$noHandleperHT','$arrpulltest','$arrswabheadpulling','$arrswabheadpopping','$pulltestdesc','$substrateDimensionforce','$pullSeatTestforce','$handleColor','$substrateLotNum','$handleTreeMaterialNum','$machineTreeMatType','$substrateType','$department')");
 			return $result;
 		}
 	}

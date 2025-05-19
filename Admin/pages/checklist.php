@@ -10,13 +10,13 @@
           <h1>Checklist</h1>
         </div>
 
-        <?php if ($_SESSION['account_type'] == 'QA' || $_SESSION['account_type'] == 'Admin' || $_SESSION['account_type'] == 'QA Manager') { ?>
-          <div class="col-sm-6">
+       <?php //if ($_SESSION['account_type'] == 'QA' || $_SESSION['account_type'] == 'Admin' || $_SESSION['account_type'] == 'QA Manager') { ?>
+<!--           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li><a type="button" class="btn btn-info fa fa-plus-square createProduct" data-toggle="modal" data-target="#CreateModal"> Add Checklist </a></li>
             </ol>
-          </div>
-        <?php   } ?>
+          </div> --> 
+        <?php // } ?>
 
         <?php if ($_SESSION['account_type'] == 'QA' || $_SESSION['account_type'] == 'Admin' || $_SESSION['account_type'] == 'QA Manager') { ?>
           <div class="col-sm-6">
