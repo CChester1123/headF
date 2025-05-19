@@ -5,7 +5,7 @@ ini_set('display_errors', 0);
 header('Access-Control-Allow-Origin: *');
 session_start();
 
-define('DB_SERVER', 'localhost');
+define('DB_SERVER', '192.168.11.177');
 define('DB_USER', 'root');
 define('DB_PASS', '');
 define('DB_NAME', 'headforming');
