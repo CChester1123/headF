@@ -1,3 +1,5 @@
+
+
 <?php
 date_default_timezone_set('Asia/Manila');
 error_reporting(E_ALL);
@@ -149,7 +151,7 @@ class admin_creation
 
 	public function getProduct()
 	{
-		$result = mysqli_query($this->dbh, "SELECT id, productname, productDesc, status FROM headforming.tbl_products2 ORDER BY id DESC ");
+		$result = mysqli_query($this->dbh, "SELECT id, productname, productDesc, status, department FROM headforming.tbl_products2 ORDER BY id DESC ");
 		return $result;
 	}
 
@@ -344,7 +346,7 @@ WHERE id = '$checklistId';
 
 	public function GetCheckList()
 	{
-		$result = mysqli_query($this->dbh, "SELECT id, workorder,product, status, status_maintenance, status_TL ,type,InspectedBY,date FROM headforming.tbl_checklist WHERE status != '0' OR status is null ORDER BY id DESC");
+		$result = mysqli_query($this->dbh, "SELECT id, workorder,product, status, status_maintenance, status_TL ,type,InspectedBY,date FROM headforming.tbl_checklist WHERE status != '0' OR status is null ORDER BY id DESC LIMIT 1000");
 		return $result;
 	}
 
@@ -425,7 +427,8 @@ WHERE id = '$checklistId';
 	public function value1Actual($value1)
 	{
 		$data = explode(',', $value1);
-		return $data[0];
+		 return $data[0];
+		
 	}
 
 	public function value2Actual($value2)
@@ -611,7 +614,7 @@ WHERE id = '$checklistId';
 
 	public function GetCheckListThermal()
 	{
-		$result = mysqli_query($this->dbh, "SELECT * FROM tbl_thermalbonding WHERE status != '0' OR status is null ORDER BY id DESC");
+		$result = mysqli_query($this->dbh, "SELECT * FROM tbl_thermalbonding WHERE status != '0' OR status is null ORDER BY id DESC LIMIT 1000");
 		return $result;
 	}
 

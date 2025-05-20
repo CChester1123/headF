@@ -35,6 +35,7 @@
                     <th style="text-align:center;">Product Name</th>
                     <th style="text-align:center;">Product Description</th>
                     <th style="text-align:center;">Status</th>
+                    <th style="text-align:center;">Location</th>
                   </tr>
                 </thead>
 
@@ -50,6 +51,7 @@
                       <td style="text-align:center;"><?php echo htmlentities($row['productname']); ?></td>
                       <td style="text-align:center;"><?php echo htmlentities($row['productDesc']); ?></td>
                       <td style="text-align:center;"><?php echo htmlentities($row['status']); ?></td>
+                      <td style="text-align:center;"><?php echo htmlentities($row['department']); ?></td>
                     </tr>
                   <?php } ?>
                 </tbody>

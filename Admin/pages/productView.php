@@ -611,7 +611,7 @@ while ($row = mysqli_fetch_array($sql)) {
                           Min
                         </div>
                         <div class="col-sm-9">
-                          <input type="text" class="form-control" id="heaterTempUpnLow" placeholder="Enter Minimum" value="' . htmlspecialchars($user->value1actual($row['heaterTempUpnLowRange'])) . '" readonly disabled>
+                          <input type="text" class="form-control" id="heaterTempUpnLow" placeholder="Enter Minimum" value="' . htmlspecialchars($user->value1actual($row['heaterTempUpnLowRange'])) . '" readonly disabled> 
                         </div>
                       </div>
                     </div>
@@ -643,7 +643,7 @@ while ($row = mysqli_fetch_array($sql)) {
                           Min
                         </div>
                         <div class="col-sm-9">
-                          <input type="text" class="form-control" id="heatingTime" placeholder="Enter Minimum" value="' . htmlspecialchars($user->value1actual($row['heatingTimeRange'])) . '" readonly disabled>
+                          <input type="text" class="form-control" id="heatingTime" placeholder="Enter Minimum" value="' . htmlspecialchars($user->value2actual($row['heatingTimeRange'])) . '" readonly disabled>
                         </div>
                       </div>
                     </div>

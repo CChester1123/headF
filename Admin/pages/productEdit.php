@@ -1563,23 +1563,25 @@ while ($row = mysqli_fetch_array($sql)) {
     //   console.log(pair[0] + ": " + pair[1]);
     // }
 
-    $.ajax({
-      url: "../pages/codes/admin_control.php",
-      data: fd,
-      processData: false,
-      contentType: false,
-      type: 'POST',
-      success: function(result) {
-        if ($.trim(result) == 1) {
-          $.notify("Account Created Successfully ", "success");
-          setTimeout(function() {
-            window.location.href = "products2";
-          }, 2000);
-        } else {
-          $.notify(result, "error");
-          $("#dataSubmitDelete").attr("disabled", false);
-        }
-      }
-    });
+    alert(prod_id);
+
+    // $.ajax({
+    //   url: "../pages/codes/admin_control.php",
+    //   data: fd,
+    //   processData: false,
+    //   contentType: false,
+    //   type: 'POST',
+    //   success: function(result) {
+    //     if ($.trim(result) == 1) {
+    //       $.notify("Account Created Successfully ", "success");
+    //       setTimeout(function() {
+    //         window.location.href = "products2";
+    //       }, 2000);
+    //     } else {
+    //       $.notify(result, "error");
+    //       $("#dataSubmitDelete").attr("disabled", false);
+    //     }
+    //   }
+    // });
   });
 </script>
