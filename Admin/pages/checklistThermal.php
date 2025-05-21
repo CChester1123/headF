@@ -195,7 +195,21 @@ while ($row = mysqli_fetch_array($sql)) {
                                     </div>
                                 </div>
 
-                                <div class="form-group">
+                                                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm">
+                      <label>Handle Tree Material Type</label>
+                      <input type="text" class="form-control" id="machineTreeMatType" placeholder="Enter Handle Tree Material Type" value="<?php echo $row['machineTreeMatType']; ?>"  >
+                    </div>
+
+                    <div class="col-sm">
+                      <label>Substrate Material Type</label>
+                      <input type="text" class="form-control" id="substrateType" placeholder="Enter Handle Material Type" value="<?php echo $row['substrateType']; ?>"  >
+                    </div>
+                  </div>
+                </div>
+
+            <!--                     <div class="form-group">
                                     <div class="row">
                                         <div class="col-sm">
                                             <label>Swab Handle with Texwipe Logo?</label>
@@ -210,7 +224,7 @@ while ($row = mysqli_fetch_array($sql)) {
                                             <input type="text" class="form-control" id="remarksInprocess" placeholder="Enter Remarks">
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>

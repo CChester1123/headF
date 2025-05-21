@@ -85,7 +85,16 @@ while ($row = mysqli_fetch_array($sql)) {
                   <div class="row">
                     <div class="col-sm">
                       <label>Handle Tree Color</label>
-                      <?php if ($deptType == "Thermal Bonding") { ?>
+                    <?php if ($deptType == "Head Forming") { ?>
+                        <select class="form-control" id="handleColor">
+                          <option value="Light green" <?php echo ($row['handleTreeColor'] == 'Light green') ? 'selected' : ''; ?>>Light Green</option>
+                          <option value="Orange" <?php echo ($row['handleTreeColor'] == 'Orange') ? 'selected' : ''; ?>>Orange</option>
+                          <option value="Blue" <?php echo ($row['handleTreeColor'] == 'Blue') ? 'selected' : ''; ?>>Blue</option>
+                          <option value="Light Blue" <?php echo ($row['handleTreeColor'] == 'Light Blue') ? 'selected' : ''; ?>>Light Blue</option>
+                          <option value="White" <?php echo ($row['handleTreeColor'] == 'White') ? 'selected' : ''; ?>>White</option>
+                        </select>
+                      <?php } else
+                       if ($deptType == "Thermal Bonding") { ?>
                         <select class="form-control" id="handleColor">
                           <option value="Light green" <?php echo ($row['handleTreeColor'] == 'Light green') ? 'selected' : ''; ?>>Light Green</option>
                           <option value="Orange" <?php echo ($row['handleTreeColor'] == 'Orange') ? 'selected' : ''; ?>>Orange</option>
@@ -120,12 +129,12 @@ while ($row = mysqli_fetch_array($sql)) {
                   <div class="row">
                     <div class="col-sm">
                       <label>Handle Tree Material Type</label>
-                      <input type="text" class="form-control" id="machineTreeMatType" placeholder="Enter Handle Tree Material Type" value="<?php echo $row['handleTreeMatType']; ?>">
+                      <input type="text" class="form-control" id="machineTreeMatType" placeholder="Enter Handle Tree Material Type" value="<?php echo $row['machineTreeMatType']; ?>">
                     </div>
 
                     <div class="col-sm">
                       <label>Substrate Material Type</label>
-                      <input type="text" class="form-control" id="substrateType" placeholder="Enter Handle Material Type" value="<?php echo $row['substrateMatType']; ?>">
+                      <input type="text" class="form-control" id="substrateType" placeholder="Enter Handle Material Type" value="<?php echo $row['substrateType']; ?>">
                     </div>
                   </div>
                 </div>
@@ -1563,25 +1572,29 @@ while ($row = mysqli_fetch_array($sql)) {
     //   console.log(pair[0] + ": " + pair[1]);
     // }
 
-    alert(prod_id);
 
-    // $.ajax({
-    //   url: "../pages/codes/admin_control.php",
-    //   data: fd,
-    //   processData: false,
-    //   contentType: false,
-    //   type: 'POST',
-    //   success: function(result) {
-    //     if ($.trim(result) == 1) {
-    //       $.notify("Account Created Successfully ", "success");
-    //       setTimeout(function() {
-    //         window.location.href = "products2";
-    //       }, 2000);
-    //     } else {
-    //       $.notify(result, "error");
-    //       $("#dataSubmitDelete").attr("disabled", false);
-    //     }
-    //   }
-    // });
+
+    $.ajax({
+      url: "../pages/codes/admin_control.php",
+      data: fd,
+      processData: false,
+      contentType: false,
+      type: 'POST',
+      success: function(result) {
+
+        console.log(result);
+
+            $("#dataSubmitDelete").attr("disabled", false);
+        if ($.trim(result) == 1) {
+          $.notify("Account Created Successfully ", "success");
+          setTimeout(function() {
+            window.location.href = "products2";
+          }, 2000);
+        } else {
+          $.notify(result, "error");
+          $("#dataSubmitDelete").attr("disabled", false);
+        }
+      }
+    });
   });
 </script>

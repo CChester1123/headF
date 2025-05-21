@@ -169,10 +169,12 @@ class admin_creation
 		return $result;
 	}
 
-	public function editProduct($prod_id, $product, $productDesc, $handle, $subtrate, $status, $arrcuttingforce, $arrsealingtime, $arrcuttingspeed, $arrapproachingposition, $arrsealingpositionspeed, $arrsealingposition, $arrCheckbox, $moldopenspeed, $arrwatertemp, $arrairpressure, $arrupperheatertemp, $arrlowerheatertemp, $arruppermoldtemp, $arrlowermoldtemp, $arrtotalLength, $arrswabheadlength, $arrswabheadwidth, $arrswabheadthickness, $arrswabhandlewidth, $arrswabhandlethickness, $arrswabhandlediameter, $noHandleperHT, $arrpulltest, $arrswabheadpulling, $arrswabheadpopping, $pulltestdesc, $substrateDimensionforce, $pullSeatTestforce, $handleColor, $substrateLotNum, $handleTreeMaterialNum, $machineTreeMatType, $substrateType)
+	public function editProduct($prod_id, $product, $productDesc, $handle, $subtrate, $status, $arrcuttingforce, $arrsealingtime, $arrcuttingspeed, $arrapproachingposition, $arrsealingpositionspeed, $arrsealingposition, $arrCheckbox, $moldopenspeed, $arrwatertemp, $arrairpressure, $arrupperheatertemp, $arrlowerheatertemp, $arruppermoldtemp, $arrlowermoldtemp, $arrtotalLength, $arrswabheadlength, $arrswabheadwidth, $arrswabheadthickness, $arrswabhandlewidth, $arrswabhandlethickness, $arrswabhandlediameter, $noHandleperHT, $arrpulltest, $arrswabheadpulling, $arrswabheadpopping, $pulltestdesc, $substrateDimensionforce, $pullSeatTestforce, $handleColor, $substrateLotNum, $handleTreeMaterialNum, $machineTreeMatType, $substrateType,$arrheaterTempUpnLow,$arrheatingTime,$arrheaterSwabHandleFixture,
+$arrfixtureClosingTime)
 	{
 
-		$result = mysqli_query($this->dbh, "UPDATE tbl_products2 SET productname = '$product',  productDesc = '$productDesc',  handle = '$handle',  substrate = '$subtrate',  status = '$status',  cuttingforceRange = '$arrcuttingforce',  sealingtimeRange = '$arrsealingtime',  cuttingspeedRange = '$arrcuttingspeed',  approachingpositionRange = '$arrapproachingposition',  sealingpositionspeedRange = '$arrsealingpositionspeed',  sealingpositionRange = '$arrsealingposition',  mode = '$arrCheckbox',  moldopenspeedRange = '$moldopenspeed',  watertempRange = '$arrwatertemp',  airpressureRange = '$arrairpressure',  upperheattempRange = '$arrupperheatertemp',  lowerheattempRange = '$arrlowerheatertemp',  uppermoldtempRange = '$arruppermoldtemp',  lowermoldtempRange = '$arrlowermoldtemp',  totallengthRange = '$arrtotalLength',  swabheadlengthRange = '$arrswabheadlength',  swabheadwidthRange = '$arrswabheadwidth',  swabheadthicknessRange = '$arrswabheadthickness',  swabhandlewidthRange = '$arrswabhandlewidth',  swabhandlethicknessRange = '$arrswabhandlethickness',  swabheaddiameterRange = '$arrswabhandlediameter',  noofsample = '$noHandleperHT',  pullTest = '$arrpulltest',  swabheadpullingRange = '$arrswabheadpulling',  swabheadpoppingRange = '$arrswabheadpopping', pulltestdesc='$pulltestdesc',substrateDimention = '$substrateDimensionforce',pullSeatTest='$pullSeatTestforce', handleColor = '$handleColor' ,substrateLotNum='$substrateLotNum' ,handleTreeMaterialNum='$handleTreeMaterialNum',machineTreeMatType='$machineTreeMatType',substrateType='$substrateType' WHERE id = '$prod_id'");
+		$result = mysqli_query($this->dbh, "UPDATE tbl_products2 SET productname = '$product',  productDesc = '$productDesc',  handle = '$handle',  substrate = '$subtrate',  status = '$status',  cuttingforceRange = '$arrcuttingforce',  sealingtimeRange = '$arrsealingtime',  cuttingspeedRange = '$arrcuttingspeed',  approachingpositionRange = '$arrapproachingposition',  sealingpositionspeedRange = '$arrsealingpositionspeed',  sealingpositionRange = '$arrsealingposition',  mode = '$arrCheckbox',  moldopenspeedRange = '$moldopenspeed',  watertempRange = '$arrwatertemp',  airpressureRange = '$arrairpressure',  upperheattempRange = '$arrupperheatertemp',  lowerheattempRange = '$arrlowerheatertemp',  uppermoldtempRange = '$arruppermoldtemp',  lowermoldtempRange = '$arrlowermoldtemp',  totallengthRange = '$arrtotalLength',  swabheadlengthRange = '$arrswabheadlength',  swabheadwidthRange = '$arrswabheadwidth',  swabheadthicknessRange = '$arrswabheadthickness',  swabhandlewidthRange = '$arrswabhandlewidth',  swabhandlethicknessRange = '$arrswabhandlethickness',  swabheaddiameterRange = '$arrswabhandlediameter',  noofsample = '$noHandleperHT',  pullTest = '$arrpulltest',  swabheadpullingRange = '$arrswabheadpulling',  swabheadpoppingRange = '$arrswabheadpopping', pulltestdesc='$pulltestdesc',substrateDimention = '$substrateDimensionforce',pullSeatTest='$pullSeatTestforce', handleColor = '$handleColor' ,substrateLotNum='$substrateLotNum' ,handleTreeMaterialNum='$handleTreeMaterialNum',machineTreeMatType='$machineTreeMatType',substrateType='$substrateType',heaterTempUpnLowRange = '$arrheaterTempUpnLow', heatingTimeRange ='$arrheatingTime', heaterSwabHandleFixtureRange = '$arrheaterSwabHandleFixture',
+fixtureClosingTimeRange= '$arrfixtureClosingTime' WHERE id = '$prod_id'");
 		return $result;
 	}
 
@@ -494,7 +496,19 @@ WHERE id = '$checklistId';
 
 	public function GetCheckListChecker($emp_id)
 	{
-		$result = mysqli_query($this->dbh, "SELECT id, workorder,productDesc, status, status_maintenance, status_TL,type,InspectedBY,date FROM headforming.tbl_checklist WHERE status != '0' OR status is null AND acknowledge like '%$emp_id%' OR maintenancecheced  like '%$emp_id%' ORDER BY id DESC");
+		$result = mysqli_query($this->dbh, "SELECT id, workorder,productDesc, status, status_maintenance, status_TL,type,InspectedBY,date FROM headforming.tbl_checklist WHERE status != '0' OR status is null AND acknowledge like '%$emp_id%' OR maintenancecheced  like '%$emp_id%'  ORDER BY id DESC LIMIT 1000 ");
+		return $result;
+	}
+
+		public function GetCheckListCheckerThermal($emp_id)
+	{
+		$result = mysqli_query($this->dbh, "SELECT * FROM tbl_thermalbonding WHERE status != '0' OR status is null  ORDER BY id DESC LIMIT 1000");
+		return $result;
+	}
+
+	public function GetCheckListCheckerSwab($emp_id)
+	{
+		$result = mysqli_query($this->dbh, "SELECT * FROM tbl_swabassembly WHERE status != '0' OR status is null ORDER BY id DESC");
 		return $result;
 	}
 
@@ -614,7 +628,7 @@ WHERE id = '$checklistId';
 
 	public function GetCheckListThermal()
 	{
-		$result = mysqli_query($this->dbh, "SELECT * FROM tbl_thermalbonding WHERE status != '0' OR status is null ORDER BY id DESC LIMIT 1000");
+		$result = mysqli_query($this->dbh, "SELECT * FROM tbl_thermalbonding WHERE status != '0' OR status is null  ORDER BY id DESC LIMIT 1000");
 		return $result;
 	}
 

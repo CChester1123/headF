@@ -62,8 +62,11 @@ while ($row = mysqli_fetch_array($sql)) {
                                         <div class="col-sm">
                                             <label>Assigned Team Leader</label>
                                             <select class="form-control" id="teamLead" value="<?php echo $row['teamLead']; ?>">
-                                                <option value="asd">asd</option>
-                                                <option value="dsa">dsa</option>
+                                                    <?php 
+                                $sql=$user->selectTeamlead();
+                                while($list=mysqli_fetch_array($sql)){?>
+                                  <option value="<?php echo $list['employeeID']; ?>" <?php if($list['employeeID'] ==$row['acknowledge']) { echo "selected"; } ?> ><?php echo $list['fullName']; ?></option>
+                                <?php } ?>  
                                             </select>
                                         </div>
 
@@ -192,7 +195,20 @@ while ($row = mysqli_fetch_array($sql)) {
                                     </div>
                                 </div>
 
-                                <div class="form-group">
+                                                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm">
+                      <label>Handle Tree Material Type</label>
+                      <input type="text" class="form-control" id="machineTreeMatType" placeholder="Enter Handle Tree Material Type" value="<?php echo $row['machineTreeMatType']; ?>"  >
+                    </div>
+
+                    <div class="col-sm">
+                      <label>Substrate Material Type</label>
+                      <input type="text" class="form-control" id="substrateType" placeholder="Enter Handle Material Type" value="<?php echo $row['substrateType']; ?>"  >
+                    </div>
+                  </div>
+                </div>
+                         <!--        <div class="form-group">
                                     <div class="row">
                                         <div class="col-sm">
                                             <label>Swab Handle with Texwipe Logo?</label>
@@ -207,7 +223,7 @@ while ($row = mysqli_fetch_array($sql)) {
                                             <input type="text" class="form-control" id="remarksInprocess" placeholder="Enter Remarks" value="<?php echo $row['remarksInprocess']; ?>">
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>

@@ -124,7 +124,7 @@
                   if ($_SESSION['account_type'] == 'QA' || $_SESSION['account_type'] == 'Admin' || $_SESSION['account_type'] == 'QA Manager') {
                     $sql = $user->GetCheckListThermal();
                   } else {
-                    $sql = $user->GetCheckListChecker($_SESSION['emp_id']);
+                    $sql = $user->GetCheckListCheckerThermal($_SESSION['emp_id']);
                   }
                   while ($row = mysqli_fetch_array($sql)) { ?>
                     <tr>
@@ -177,7 +177,7 @@
                     if ($_SESSION['account_type'] == 'QA' || $_SESSION['account_type'] == 'Admin' || $_SESSION['account_type'] == 'QA Manager') {
                       $sql = $user->GetCheckListSwab();
                     } else {
-                      $sql = $user->GetCheckListChecker($_SESSION['emp_id']);
+                      $sql = $user->GetCheckListCheckerSwab($_SESSION['emp_id']);
                     }
                     while ($row = mysqli_fetch_array($sql)) { ?>
                       <tr>

@@ -151,13 +151,26 @@ if ($pick == 0 || $pick == "0" || $pick == '0') {
 
 
 
+	$arrheaterTempUpnLow = htmlentities(htmlspecialchars(urldecode($_POST['arrheaterTempUpnLow'])));
+	$arrheatingTime = htmlentities(htmlspecialchars(urldecode($_POST['arrheatingTime'])));
+
+
+	$arrheaterSwabHandleFixture = htmlentities(htmlspecialchars(urldecode($_POST['arrheaterSwabHandleFixture'])));
+	$arrfixtureClosingTime = htmlentities(htmlspecialchars(urldecode($_POST['arrfixtureClosingTime'])));
+
+
+
+
+
+
 	$handleColor = htmlentities(htmlspecialchars(urldecode($_POST['handleColor'])));
 	$substrateLotNum = htmlentities(htmlspecialchars(urldecode($_POST['substrateLotNum'])));
 	$handleTreeMaterialNum = htmlentities(htmlspecialchars(urldecode($_POST['handleTreeMaterialNum'])));
 	$machineTreeMatType = htmlentities(htmlspecialchars(urldecode($_POST['machineTreeMatType'])));
 	$substrateType = htmlentities(htmlspecialchars(urldecode($_POST['substrateType'])));
 
-	echo $sql = $insertdata->editProduct($prod_id, $product, $productDesc, $handle, $subtrate, $status, $arrcuttingforce, $arrsealingtime, $arrcuttingspeed, $arrapproachingposition, $arrsealingpositionspeed, $arrsealingposition, $arrCheckbox, $moldopenspeed, $arrwatertemp, $arrairpressure, $arrupperheatertemp, $arrlowerheatertemp, $arruppermoldtemp, $arrlowermoldtemp, $arrtotalLength, $arrswabheadlength, $arrswabheadwidth, $arrswabheadthickness, $arrswabhandlewidth, $arrswabhandlethickness, $arrswabhandlediameter, $noHandleperHT, $arrpulltest, $arrswabheadpulling, $arrswabheadpopping, $pulltestdesc, $substrateDimensionforce, $pullSeatTestforce, $handleColor, $substrateLotNum, $handleTreeMaterialNum, $machineTreeMatType, $substrateType);
+	echo $sql = $insertdata->editProduct($prod_id, $product, $productDesc, $handle, $subtrate, $status, $arrcuttingforce, $arrsealingtime, $arrcuttingspeed, $arrapproachingposition, $arrsealingpositionspeed, $arrsealingposition, $arrCheckbox, $moldopenspeed, $arrwatertemp, $arrairpressure, $arrupperheatertemp, $arrlowerheatertemp, $arruppermoldtemp, $arrlowermoldtemp, $arrtotalLength, $arrswabheadlength, $arrswabheadwidth, $arrswabheadthickness, $arrswabhandlewidth, $arrswabhandlethickness, $arrswabhandlediameter, $noHandleperHT, $arrpulltest, $arrswabheadpulling, $arrswabheadpopping, $pulltestdesc, $substrateDimensionforce, $pullSeatTestforce, $handleColor, $substrateLotNum, $handleTreeMaterialNum, $machineTreeMatType, $substrateType,$arrheaterTempUpnLow,$arrheatingTime,$arrheaterSwabHandleFixture,
+$arrfixtureClosingTime);
 } else if ($pick == 8 || $pick == "8" || $pick == '8') {
 	$partNo = htmlentities(htmlspecialchars(urldecode($_POST['partNo'])));
 	$sql = $insertdata->selectPartNumber($partNo);

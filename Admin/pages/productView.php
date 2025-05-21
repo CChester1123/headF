@@ -86,7 +86,15 @@ while ($row = mysqli_fetch_array($sql)) {
                   <div class="row">
                     <div class="col-sm">
                       <label>Handle Tree Color</label>
-                      <?php if ($deptType == "Thermal Bonding") { ?>
+                      <?php if ($deptType == "Head Forming") { ?>
+                        <select class="form-control" id="handleColor" readonly disabled>
+                          <option value="Light green" <?php echo ($row['handleTreeColor'] == 'Light green') ? 'selected' : ''; ?>>Light Green</option>
+                          <option value="Orange" <?php echo ($row['handleTreeColor'] == 'Orange') ? 'selected' : ''; ?>>Orange</option>
+                          <option value="Blue" <?php echo ($row['handleTreeColor'] == 'Blue') ? 'selected' : ''; ?>>Blue</option>
+                          <option value="Light Blue" <?php echo ($row['handleTreeColor'] == 'Light Blue') ? 'selected' : ''; ?>>Light Blue</option>
+                          <option value="White" <?php echo ($row['handleTreeColor'] == 'White') ? 'selected' : ''; ?>>White</option>
+                        </select>
+                      <?php } elseif ($deptType == "Thermal Bonding") { ?>
                         <select class="form-control" id="handleColor" readonly disabled>
                           <option value="Light green" <?php echo ($row['handleTreeColor'] == 'Light green') ? 'selected' : ''; ?>>Light Green</option>
                           <option value="Orange" <?php echo ($row['handleTreeColor'] == 'Orange') ? 'selected' : ''; ?>>Orange</option>
@@ -121,12 +129,12 @@ while ($row = mysqli_fetch_array($sql)) {
                   <div class="row">
                     <div class="col-sm">
                       <label>Handle Tree Material Type</label>
-                      <input type="text" class="form-control" id="machineTreeMatType" placeholder="Enter Handle Tree Material Type" value="<?php echo $row['handleTreeMatType']; ?>" readonly disabled>
+                      <input type="text" class="form-control" id="machineTreeMatType" placeholder="Enter Handle Tree Material Type" value="<?php echo $row['machineTreeMatType']; ?>" readonly disabled>
                     </div>
 
                     <div class="col-sm">
                       <label>Substrate Material Type</label>
-                      <input type="text" class="form-control" id="substrateType" placeholder="Enter Handle Material Type" value="<?php echo $row['substrateMatType']; ?>" readonly disabled>
+                      <input type="text" class="form-control" id="substrateType" placeholder="Enter Handle Material Type" value="<?php echo $row['substrateType']; ?>" readonly disabled>
                     </div>
                   </div>
                 </div>
@@ -643,7 +651,7 @@ while ($row = mysqli_fetch_array($sql)) {
                           Min
                         </div>
                         <div class="col-sm-9">
-                          <input type="text" class="form-control" id="heatingTime" placeholder="Enter Minimum" value="' . htmlspecialchars($user->value2actual($row['heatingTimeRange'])) . '" readonly disabled>
+                          <input type="text" class="form-control" id="heatingTime" placeholder="Enter Minimum" value="' . htmlspecialchars($user->value1actual($row['heatingTimeRange'])) . '" readonly disabled>
                         </div>
                       </div>
                     </div>
